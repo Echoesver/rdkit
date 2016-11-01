@@ -36,7 +36,7 @@ option(RDK_BUILD_CPP_TESTS "build the c++ tests (disabing can speed up builds" O
 option(RDK_USE_FLEXBISON "use flex/bison, if available, to build the SMILES/SMARTS/SLN parsers" OFF)
 option(RDK_TEST_COVERAGE "Use G(L)COV to compute test coverage" OFF)
 option(RDK_USE_BOOST_SERIALIZATION "Use the boost serialization library if available" ON)
-option(RDK_BUILD_TEST_GZIP "Build the gzip'd stream test" OFF)
+
 option(RDK_OPTIMIZE_NATIVE "Use native features while compiling." ON)
 option(RDK_USE_STRICT_ROTOR_DEFINITION "Use the most strict rotatable bond definition" ON)
 
@@ -46,16 +46,10 @@ if(NOT MSVC)
   endif()
 endif()
 
+
 if(RDK_BUILD_SWIG_WRAPPERS!=ON)
   set(RDK_BUILD_SWIG_JAVA_WRAPPER OFF)
   set(RDK_BUILD_SWIG_CSHARP_WRAPPER OFF)
-endif()
-
-if(RDK_PGSQL_STATIC AND RDK_BUILD_PGSQL)
-  if(NOT RDK_INSTALL_STATIC_LIBS)
-    message("Enabling RDK_INSTALL_STATIC_LIBS because RDK_PGSQL_STATIC is set.")
-    set(RDK_INSTALL_STATIC_LIBS ON CACHE BOOL "install the rdkit static libraries" FORCE)
-  endif(NOT RDK_INSTALL_STATIC_LIBS)
 endif()
 
 include(TestBigEndian)
@@ -71,9 +65,9 @@ set(RDK_PYTHON_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/rdkit")
 #-------
 # Config variables:
 set(RDKit_Year "2016")
-set(RDKit_Month "09")
-set(RDKit_Revision "1.dev1")
-set(RDKit_ABI "1")
+set(RDKit_Month "03")
+set(RDKit_Revision "4")
+set(RDKit_ABI "2")
 
 set(RDKit_CodeDir "${CMAKE_CURRENT_SOURCE_DIR}/Code")
 set(RDKit_ExternalDir "${CMAKE_CURRENT_SOURCE_DIR}/External")
@@ -98,10 +92,6 @@ if(CMAKE_SIZEOF_VOID_P MATCHES 4)
 else()
   ADD_DEFINITIONS("-DRDK_64BIT_BUILD")
 endif()
-
-if(MINGW)
-  ADD_DEFINITIONS("-DBOOST_SYSTEM_NO_DEPRECATED")
-endif(MINGW)
 
 # defines macros: rdkit_python_extension, rdkit_test
 include(RDKitUtils)
@@ -222,7 +212,7 @@ if(APPLE)
   endif()
 endif(APPLE)
 
-include_directories(SYSTEM ${Boost_INCLUDE_DIRS})
+include_directories(${Boost_INCLUDE_DIRS})
 link_directories(${Boost_LIBRARY_DIRS})
 
 include_directories(${RDKit_CodeDir})
@@ -301,7 +291,7 @@ else(RDK_TEST_COVERAGE)
  if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
    # We don't on C_FLAGS warnings to keep Avalon compiling quiet
    SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-array-bounds -fPIC")
-   SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wno-unused-local-typedef -Wno-deprecated -Wno-unused-function -fno-strict-aliasing -fPIC")
+   SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated -Wno-unused-function -fno-strict-aliasing -fPIC -Wall -Wextra")
  endif()
 endif(RDK_TEST_COVERAGE)
 
