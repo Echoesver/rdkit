@@ -4,8 +4,8 @@ scriptdir="$(dirname "$(readlink -f $0)")";
 
 cd "$scriptdir/..";
 export RDBASE="$(pwd)";
-export LD_LIBRARY_PATH="$(pwd)/lib");
-export PYTHONPATH="$(pwd)/lib");
+export LD_LIBRARY_PATH="$(pwd)/lib";
+export PYTHONPATH="$(pwd)/lib";
 
 mkdir build;
 cd build;
