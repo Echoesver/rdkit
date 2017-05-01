@@ -1,8 +1,8 @@
 #!/bin/sh
 cd "$(dirname "$(readlink -f $0)")";
-mkdir usr;
-mkdir usr/lib;
-mkdir "usr/lib/python3.5";
+mkdir python3-rdkit/usr;
+mkdir python3-rdkit/usr/lib;
+mkdir python3-rdkit/usr/lib/python3.5;
 
-cp -r ../../lib/*.so.2.2016.03.4 usr/lib;
-cp -r ../../rdkit usr/lib/python3.5;
+cp -r ../../lib/*.so.2.2016.03.4 python3-rdkit/usr/lib;
+cp -r ../../rdkit python3-rdkit/usr/lib/python3.5;
