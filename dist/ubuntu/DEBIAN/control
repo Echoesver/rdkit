@@ -1,0 +1,12 @@
+Package: python3-rdkit
+Version: 2016.03.4 
+Section: science
+Priority: optional
+Architecture: amd64
+Depends: fonts-freefont-ttf, python3.5, python3-numpy (==1:1.11.0), libboost-ppython1.58.0, libboost-system.1.58.0, libboost-thread1.58.0, libc6, libgcc1, libpython3.5
+Maintainer: Philip Adler <phil@madwolfmedia.com>
+Description:
+  A non-conflicting port of RDKit (http://www.rdkit.org) for python3.
+  This package is for use with the Dark Reactions Project Software.
+  It's compatibility with other parts of the ubuntu distribution
+  is not assured- but we do try our best! 
